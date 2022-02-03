@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+  }
+}

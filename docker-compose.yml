@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  web:
+    build: "."
+    container_name: "centos"
+    ports:
+      - 80:80
+    volumes:
+      - "./con:/var"
+    tty: true
