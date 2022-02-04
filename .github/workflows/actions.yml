@@ -25,4 +25,5 @@ jobs:
         gulp
         npm install textlint@12
     - name: test
-       run: ls
+      run: |
+        ls
