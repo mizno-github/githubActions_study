@@ -1,6 +1,9 @@
 FROM centos:7
 
-RUN yum -y update && yum clean all
+RUN apt-get update && \
+  apt-get -y install git unzip libzip-dev libicu-dev libonig-dev vim wget && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* && \
 
 # Apache2.4のインストール
 # RUN yum -y install httpd
