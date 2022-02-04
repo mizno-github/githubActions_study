@@ -21,8 +21,7 @@ jobs:
 
     - name: Build
       run: |
-        npm install
-        gulp
+        npm install gulp
         npm install textlint@12
     - name: test
       run: |
