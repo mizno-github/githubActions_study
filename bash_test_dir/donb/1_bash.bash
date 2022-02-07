@@ -13,7 +13,7 @@ touch config.json
 treeError=$(tree -i | grep -vE $env_tree_ignore)
 
 if [ -n "$treeError" ] ; then
-  echo * 数字から始まらないファイルが存在します
+  echo 数字から始まらないファイルが存在します
   echo $treeError
 fi
 
