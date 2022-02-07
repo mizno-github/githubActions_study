@@ -22,9 +22,8 @@ jobs:
     - name: Build
       run: |
         apt-get update && \
-        apt-get -y install git unzip libzip-dev libicu-dev libonig-dev vim wget && \
+        apt-get -y install git unzip libzip-dev libicu-dev libonig-dev vim wget tree && \
         apt-get clean && \
-        yum install $$ \
         rm -rf /var/lib/apt/lists/* && \
         npm install gulp
         npm install textlint@12
