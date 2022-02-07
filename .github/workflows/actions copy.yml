@@ -77,5 +77,5 @@ jobs:
         # git config --global user.name "mizno-github"
         # git config --global user.email "mizno011.zeta@gmail.com"
         # hub pull-request -m "$MESSAGE" -b main -h dev
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
