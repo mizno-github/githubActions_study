@@ -5,6 +5,7 @@ on:
     branches:
       - [bash_test_0207, master]
     types: [opened, review_requested]
+  push:
 
 jobs:
   build:
