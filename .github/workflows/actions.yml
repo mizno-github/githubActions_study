@@ -30,4 +30,4 @@ jobs:
         npm install textlint@12
     - name: test
       run: |
-        ls
+        source 1_bash.bash
