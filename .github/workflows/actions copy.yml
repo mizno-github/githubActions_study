@@ -67,5 +67,6 @@ jobs:
         markdown で書ける。
         cat bash_test_dir/donb/error.txt
         "
-
+        git config --global user.name "mizno-github"
+        git config --global user.email "mizno011.zeta@gmail.com"
         hub pull-request -m "$MESSAGE" -b main -h dev
