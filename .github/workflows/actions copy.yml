@@ -57,7 +57,7 @@ jobs:
     - name: test
       run: |
         touch bash_test_dir/donb/error.txt
-        source bash_test_dir/donb/1_bash.bash >> error.txt
+        # source bash_test_dir/donb/1_bash.bash >> error.txt
     - name: comment
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -76,5 +76,5 @@ jobs:
         gh pr comment "$MESSAGE" "${URL}"
         # git config --global user.email "mizno011.zeta@gmail.com"
         # hub pull-request -m "$MESSAGE" -b main -h dev
-    # - name: Setup tmate session
-    #   uses: mxschmitt/action-tmate@v3
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
