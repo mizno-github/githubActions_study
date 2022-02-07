@@ -1,11 +1,7 @@
 name: NodeJS with Gulp
 
-on:
-  pull_request:
-    branches:
-      - [bash_test_0207, master]
-    types: [opened, review_requested]
-  push:
+on: pull_request
+
 
 jobs:
   build:
