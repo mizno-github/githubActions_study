@@ -7,6 +7,8 @@ env_tree_ignore="^[0-9]_*|[0-9][0-9]_*|config.json$|^\.$|directories"
 
 # 多分ここは必要ない
 # export LANG=en_US.UTF-8
+pws
+ls
 cd bash_test_dir/donb/
 # ０から９から始まらないファイルを抽出
 treeError=$(tree -i | grep -vE $env_tree_ignore)
