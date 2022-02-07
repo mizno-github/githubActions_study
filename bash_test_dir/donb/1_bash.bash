@@ -11,7 +11,17 @@ cd bash_test_dir/donb/
 # ０から９から始まらないファイルを抽出
 treeError=$(tree -i | grep -vE $env_tree_ignore)
 
+
+
+MESSAGE="ここがプルリクのタイトルになる
+
+## これ以降が説明欄の文章になる
+* テスト
+* test
+markdown で書ける。
 if [ -n "$treeError" ] ; then
-  echo '数字から始まらないファイルが存在します'
-  echo "$treeError "
+  数字から始まらないファイルが存在します
+  $treeError
 fi
+"
+hub pull-request -m "$MESSAGE" -b main -h dev
