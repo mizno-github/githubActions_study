@@ -1,4 +1,4 @@
-env_tree_ignore="^config.json$|^\.$|directories|^bash_test_dir/donb/$"
+env_tree_ignore="^config.json$|^\.$|directories|^./bash_test_dir/donb/$"
 # configファイル
 # カレントディレクトリ(.のみ)
 # 結果テキスト（「0 directories, 2 files」）を除外
