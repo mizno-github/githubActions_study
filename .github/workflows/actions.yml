@@ -3,7 +3,7 @@ name: NodeJS with Gulp
 on:
   pull_request:
     branches:
-      - feature/**
+      - [bash_test_0207, master]
     types: [opened, review_requested]
 
 jobs:
