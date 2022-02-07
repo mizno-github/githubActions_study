@@ -1,7 +1,7 @@
 name: NodeJS with Gulp
 
 on:
-  pull-Request:
+  pull_request:
 
 jobs:
   build:
