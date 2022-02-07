@@ -39,7 +39,7 @@ jobs:
         * テスト
         * test
         markdown で書ける。
-        echo error.txt
+        cat error.txt
         "
 
         hub pull-request -m "$MESSAGE" -b main -h dev
