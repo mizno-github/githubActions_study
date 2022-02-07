@@ -1,7 +1,10 @@
 name: NodeJS with Gulp
 
 on:
-  pull_Request:
+  pull_request:
+    branches:
+      - feature/**
+    types: [opened, review_requested]
 
 jobs:
   build:
@@ -30,4 +33,16 @@ jobs:
 
     - name: test
       run: |
-        source bash_test_dir/donb/1_bash.bash
+        touch error.txt
+        source bash_test_dir/donb/1_bash.bash >> error.txt
+
+        MESSAGE="ここがプルリクのタイトルになる
+
+        ## これ以降が説明欄の文章になる
+        * テスト
+        * test
+        markdown で書ける。
+        cat error.txt
+        "
+
+        hub pull-request -m "$MESSAGE" -b main -h dev
