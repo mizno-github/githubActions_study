@@ -1,7 +1,7 @@
 name: NodeJS with Gulp
 
 on:
-  push:
+  pull-Request:
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
         rm -rf /var/lib/apt/lists/* && \
         npm install gulp
         npm install textlint@12
+
     - name: test
       run: |
-        cd bash_test_dir/donb/
         source 1_bash.bash
