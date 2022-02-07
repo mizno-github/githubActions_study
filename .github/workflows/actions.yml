@@ -30,7 +30,7 @@ jobs:
 
     - name: test
       run: |
-        touch error.txt
+        touch bash_test_dir/donb/error.txt
         source bash_test_dir/donb/1_bash.bash >> error.txt
 
         MESSAGE="ここがプルリクのタイトルになる
@@ -39,7 +39,7 @@ jobs:
         * テスト
         * test
         markdown で書ける。
-        cat error.txt
+        cat bash_test_dir/donb/error.txt
         "
 
         hub pull-request -m "$MESSAGE" -b main -h dev
