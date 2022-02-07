@@ -57,7 +57,7 @@ jobs:
     - name: test
       run: |
         touch bash_test_dir/donb/error.txt
-        # source bash_test_dir/donb/1_bash.bash >> error.txt
+
     - name: comment
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
