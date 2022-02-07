@@ -12,6 +12,8 @@ cd bash_test_dir/donb/
 treeError=$(tree -i | grep -vE $env_tree_ignore)
 
 if [ -n "$treeError" ] ; then
-  * 数字から始まらないファイルが存在します
-  $treeError
+  echo * 数字から始まらないファイルが存在します
+  echo $treeError
 fi
+
+cd ../../
