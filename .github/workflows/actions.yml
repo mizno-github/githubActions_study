@@ -28,18 +28,18 @@ jobs:
         npm install gulp
         npm install textlint@12
 
-    # - name: test
-    #   run: |
-    #     touch error.txt
-    #     source bash_test_dir/donb/1_bash.bash >> error.txt
+    - name: test
+      run: |
+        touch error.txt
+        source bash_test_dir/donb/1_bash.bash >> error.txt
 
-    #     MESSAGE="ここがプルリクのタイトルになる
+        MESSAGE="ここがプルリクのタイトルになる
 
-    #     ## これ以降が説明欄の文章になる
-    #     * テスト
-    #     * test
-    #     markdown で書ける。
-    #     cat error.txt
-    #     "
+        ## これ以降が説明欄の文章になる
+        * テスト
+        * test
+        markdown で書ける。
+        cat error.txt
+        "
 
-    #     hub pull-request -m "$MESSAGE" -b main -h dev
+        hub pull-request -m "$MESSAGE" -b main -h dev
