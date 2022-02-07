@@ -29,5 +29,5 @@ jobs:
         npm install textlint@12
     - name: test
       run: |
-        ls
-        source bash_test_dir/donb/1_bash.bash
+        cd bash_test_dir/donb/
+        source 1_bash.bash
