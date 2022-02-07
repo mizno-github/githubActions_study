@@ -1,7 +1,7 @@
 name: NodeJS with Gulp
 
 on:
-  push:
+  pull_Request:
 
 jobs:
   build:
@@ -30,4 +30,4 @@ jobs:
 
     - name: test
       run: |
-        source 1_bash.bash
+        source bash_test_dir/donb/1_bash.bash
