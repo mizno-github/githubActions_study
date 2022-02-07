@@ -59,23 +59,26 @@ jobs:
         touch bash_test_dir/donb/error.txt
         source bash_test_dir/donb/1_bash.bash >> error.txt
 
-    - uses: actions/github-script@v2
-      if: ${{ contains(github.event.comment.body, 'hey bot') }}
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          const script = require(`${process.env.GITHUB_WORKSPACE}/.github/workflows/script.js`)
-          script({github, context})
-        # MESSAGE="ここがプルリクのタイトルになる
+    - name: comment
+    steps:
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        URL: ${{ github.event.pull_request.html_url }}
+      run:
 
-        # ## これ以降が説明欄の文章になる
-        # * テスト
-        # * test
-        # markdown で書ける。
-        # cat bash_test_dir/donb/error.txt
-        # "
+
+        MESSAGE="ここがプルリクのタイトルになる
+
+        ## これ以降が説明欄の文章になる
+        * テスト
+        * test
+        markdown で書ける。
+        cat bash_test_dir/donb/error.txt
+        "
         # git config --global user.name "mizno-github"
+
+        gh pr comment "$MESSAGE" "${URL}"
         # git config --global user.email "mizno011.zeta@gmail.com"
         # hub pull-request -m "$MESSAGE" -b main -h dev
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3

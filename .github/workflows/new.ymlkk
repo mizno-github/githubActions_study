@@ -30,3 +30,4 @@ jobs:
             }
           }' \
           | curl -s -X POST -H 'Content-Type: application/json' -H "Authorization: bearer ${GITHUB_TOKEN}" -d @- ${GITHUB_GRAPHQL_URL}
+
