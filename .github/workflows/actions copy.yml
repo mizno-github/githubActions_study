@@ -70,8 +70,6 @@ jobs:
         MESSAGE="ここがプルリクのタイトルになる
 
         ## これ以降が説明欄の文章になる
-        * テスト
-        * test
         markdown で書ける。
         cat bash_test_dir/donb/error.txt
         "
