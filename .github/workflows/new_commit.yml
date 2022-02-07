@@ -45,5 +45,5 @@ jobs:
         gh pr comment -F ./error.txt "${URL}"
 
     # debug用のコード（ssh接続できるようになる）
-    # - name: Setup tmate session
-    #   uses: mxschmitt/action-tmate@v3
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
