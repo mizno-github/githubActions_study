@@ -60,7 +60,6 @@ jobs:
         source bash_test_dir/donb/1_bash.bash >> error.txt
 
     - name: comment
-    steps:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         URL: ${{ github.event.pull_request.html_url }}
