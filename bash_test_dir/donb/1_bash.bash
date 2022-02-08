@@ -11,10 +11,18 @@ cd bash_test_dir/donb/
 touch config.json
 # ０から９から始まらないファイルを抽出
 treeError=$(tree -i | grep -vE $env_tree_ignore)
-
+# --noreport tree -J
 if [ -n "$treeError" ] ; then
   echo 数字から始まらないファイルが存在します
   echo $treeError
 fi
+
+touch workfile.json
+
+tree -JP "[0-9]_*" >>  makeJson.js
+
+sed -i './workfile.json' makeJson.js
+
+sed -i 'beforeJson = ' makeJson.js
 
 cd ../../

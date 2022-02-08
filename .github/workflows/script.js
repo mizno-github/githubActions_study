@@ -1,8 +1,14 @@
-module.exports = ({github, context}) => {
-  github.issues.createComment({
-    issue_number: context.payload.issue.number,
-    owner: context.payload.repository.owner.login,
-    repo: context.payload.repository.name,
-    body: `You said ${context.payload.comment.body}`
-  })
+var afterJson = {};
+for(var i = 0;i <beforeJson.length-1;i++){
+    afterJson.courseName = beforeJson[i]['name'];
+    var lessonInfos = beforeJson[i]['contents'];
+    for(var n=0;n < lessonInfos.length; n++){
+        afterJson.lessonInfo.lessonName = lessonInfos[n]['name'];
+        var chapters = lessonInfos[i]['contents'];
+        for(var c = 0; c < chapters.length; c++){
+            afterjson.lessonInfo.chapter[] = chapters[c]
+        }
+    }
 }
+
+
