@@ -21,12 +21,12 @@ git diff remotes/get-diff-action/master --diff-filter=d --name-only | grep -o "/
 
 # # 対象のディレクトリに移動
 # cd $workdir/lessons
-# while read line
-# do
-#   cd $main_dir/$line
-#   cd ../
-#   node $work_dir/makeJson.js
-# done < $work_dir/gitDiff.txt
+while read line
+do
+  cd $main_dir/$line
+  cd ../
+  node $work_dir/workingDir/makeJson.js > config.json
+done < $work_dir/gitDiff.txt
 
 
 # 1_frontをedit.txtに入れる

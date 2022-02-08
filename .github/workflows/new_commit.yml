@@ -51,7 +51,9 @@ jobs:
 
     - name: notify diff
       if: contains(env.GIT_DIFF, 'README.md')
-      run: echo ${{ env.GIT_DIFF }}
+      run: |
+        echo ${{ env.GIT_DIFF }}
+        bash .github/workflows/workingDir/1_bash.bash
     # コメント投稿の箇所
     # - name: Post comments
     #   env:

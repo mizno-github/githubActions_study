@@ -2,15 +2,15 @@
 // js実行までに行う事
 // dirの代入
 var initDir = __dirname;
-if(initDir.indexOf('1_front/') === 0){
-  var dir = '1_front/';
-}else if(initDir.indexOf('2_back/') === 0){
-  var dir = '2_back/';
+if(initDir.indexOf('/1_front/') === -1){
+  var dir = '../../../1_front/';
+}else if(initDir.indexOf('/2_back/') === -1){
+  var dir = '../../../2_back/';
 } else {
 	console.log('ディレクトリが違います');
 	process.exit(1)
 }
-var dir = '1_front/'; // gitの差分から指定
+// var dir = '1_front/'; // gitの差分から指定
 var fs = require("fs")
 var path = require("path")
 
