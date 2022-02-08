@@ -26,19 +26,19 @@ cd $workdir/lessons
 touch ../config.json
 
 # 1_frontをedit.txtに入れる
-echo var workdir = "$workdir" >> edit.txt
+# echo var workdir = "$workdir" >> edit.txt
 
-# gitの変更履歴の部分で「1_html/cssを学ぼう」の部分を選択する
-editFile=1_html／cssを学ぼう
+# # gitの変更履歴の部分で「1_html/cssを学ぼう」の部分を選択する
+# editFile=1_html／cssを学ぼう
 
-# 編集したディレクトリの配下をJsonとしてedit.txtに保存
-tree -JP "[0-9]_*" $editFile  --noreport >>  edit.txt
+# # 編集したディレクトリの配下をJsonとしてedit.txtに保存
+# tree -JP "[0-9]_*" $editFile  --noreport >>  edit.txt
 
-# edit.txtの中身をmakeJson.jsの先頭に追加する
-sed -i 'edit.txt' ../../makeJson.js
+# # edit.txtの中身をmakeJson.jsの先頭に追加する
+# sed -i 'edit.txt' ../../makeJson.js
 
-# makeJson.jsを実行し、config.jsに保存する
-# node ../../makeJson.js >> ../config.json
+# # makeJson.jsを実行し、config.jsに保存する
+# # node ../../makeJson.js >> ../config.json
 
-# 作業ディレクトリに戻る
-# cd ../../
+# # 作業ディレクトリに戻る
+# # cd ../../
