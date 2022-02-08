@@ -18,7 +18,7 @@ fi
 ################     ファイル名の一部抽出&Json化    ##################
 
 # gitの変更履歴で1_front or 2_backを選択する
-workdir=1_front
+workdir='1_front'
 
 # 対象のディレクトリに移動
 cd $workdir/lessons
