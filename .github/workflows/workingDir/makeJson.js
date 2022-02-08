@@ -1,6 +1,7 @@
 // ^[0-9]_*|[0-9][0-9]_*
-
-var dir = './1_front/'; // gitの差分から指定
+// js実行までに行う事
+// dirの代入
+var dir = '1_front/'; // gitの差分から指定
 var fs = require("fs")
 var path = require("path")
 

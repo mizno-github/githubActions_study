@@ -34,20 +34,24 @@ jobs:
     #   run: |
     #     touch bash_test_dir/donb/error.txt
     #     source bash_test_dir/donb/1_bash.bash >> error.txt
+    # 自分が作成した部分
+    # - name: test
+    #   run: |
 
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
 
-    - name: Get Diff
-      uses: technote-space/get-diff-action@v5
-      with:
-        FILES: |
-          README.md
+                                                  # - uses: actions/checkout@v2
+                                                  #   with:
+                                                  #     fetch-depth: 0
 
-    - name: notify diff
-      if: contains(env.GIT_DIFF, 'README.md')
-      run: echo ${{ env.GIT_DIFF }}
+                                                  # - name: Get Diff
+                                                  #   uses: technote-space/get-diff-action@v5
+                                                  #   with:
+                                                  #     FILES: |
+                                                  #       README.md
+
+                                                  # - name: notify diff
+                                                  #   if: contains(env.GIT_DIFF, 'README.md')
+                                                  #   run: echo ${{ env.GIT_DIFF }}
     # コメント投稿の箇所
     # - name: Post comments
     #   env:
