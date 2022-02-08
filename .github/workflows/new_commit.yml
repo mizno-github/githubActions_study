@@ -30,15 +30,14 @@ jobs:
         npm install gulp
         npm install textlint@12
     # 自分が作成した部分
-    - name: test
-      run: |
-        touch bash_test_dir/donb/error.txt
-        source bash_test_dir/donb/1_bash.bash >> error.txt
+    # - name: test
+    #   run: |
+    #     touch bash_test_dir/donb/error.txt
+    #     source bash_test_dir/donb/1_bash.bash >> error.txt
 
-    - name: checkout
-      uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: Get Diff
       uses: technote-space/get-diff-action@v5
