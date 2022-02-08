@@ -1,26 +1,26 @@
-# env_tree_ignore="^[0-9]_*|[0-9][0-9]_*|config.json$|^\.$|directories|^content.md$|^index.html$|^style.css$|^index.js$|^images$|^lessons$"
-# main_dir=../../bash_test_dir/donb/
-# work_dir=
+env_tree_ignore="^[0-9]_*|[0-9][0-9]_*|config.json$|^\.$|directories|^content.md$|^index.html$|^style.css$|^index.js$|^images$|^lessons$"
+main_dir=/home/runner/work/helloworld/helloworld/bash_test_dir/donb
+work_dir=/home/runner/work/helloworld/helloworld/.github/workflows
 
-# cd $home_dir
+cd $main_dir
 
 
-# ################     ファイル名の間違いチェック    ##################
-# treeError=$(tree -i --noreport | grep -vE $env_tree_ignore)
-# if [ -n "$treeError" ] ; then
-#   echo 数字から始まらないファイルが存在します
-#   echo $treeError
-# fi
+################     ファイル名の間違いチェック    ##################
+treeError=$(tree -i --noreport | grep -vE $env_tree_ignore)
+if [ -n "$treeError" ] ; then
+  echo 数字から始まらないファイルが存在します
+  echo $treeError
+fi
 
-# ################     ファイル名の一部抽出&Json化    ##################
+################     ファイル名の一部抽出&Json化    ##################
 
+git config --local core.quotepath false
+# git diff master --name-status | grep -o "/[0-9].*/lessons/[0-9].*/" >> gitDiff.txt
 # # gitの変更履歴で1_front or 2_backを選択する
 # workdir='1_front'
 
 # # 対象のディレクトリに移動
 # cd $workdir/lessons
-# git config --local core.quotepath false
-# git diff master --name-status | grep -o "/[0-9].*/lessons/[0-9].*/" >> gitDiff.txt
 # while read line
 # do
 #   cd "${line}"

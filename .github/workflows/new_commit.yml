@@ -43,15 +43,15 @@ jobs:
                                                   #   with:
                                                   #     fetch-depth: 0
 
-                                                  # - name: Get Diff
-                                                  #   uses: technote-space/get-diff-action@v5
-                                                  #   with:
-                                                  #     FILES: |
-                                                  #       README.md
+    - name: Get Diff
+      uses: technote-space/get-diff-action@v5
+      with:
+        FILES: |
+          README.md
 
-                                                  # - name: notify diff
-                                                  #   if: contains(env.GIT_DIFF, 'README.md')
-                                                  #   run: echo ${{ env.GIT_DIFF }}
+    - name: notify diff
+      if: contains(env.GIT_DIFF, 'README.md')
+      run: echo ${{ env.GIT_DIFF }}
     # コメント投稿の箇所
     # - name: Post comments
     #   env:
