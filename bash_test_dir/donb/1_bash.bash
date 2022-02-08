@@ -23,7 +23,7 @@ workdir='1_front'
 # 対象のディレクトリに移動
 cd $workdir/lessons
 
-touch ../config.json
+
 
 # 1_frontをedit.txtに入れる
 # echo var workdir = "$workdir" >> edit.txt
