@@ -35,7 +35,8 @@ jobs:
         touch bash_test_dir/donb/error.txt
         source bash_test_dir/donb/1_bash.bash >> error.txt
 
-    - uses: actions/checkout@v2
+    - name: checkout
+      uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
