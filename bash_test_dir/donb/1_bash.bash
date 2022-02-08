@@ -19,10 +19,10 @@ fi
 
 touch workfile.json
 
-tree -JP "[0-9]_*" >>  makeJson.js
+# tree -JP "[0-9]_*" >>  makeJson.js
 
-sed -i './workfile.json' makeJson.js
+# sed -i './workfile.json' makeJson.js
 
-sed -i 'beforeJson = ' makeJson.js
+# sed -i 'beforeJson = ' makeJson.js
 
-cd ../../
+# cd ../../
