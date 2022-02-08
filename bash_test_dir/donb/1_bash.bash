@@ -38,7 +38,7 @@ tree -JP "[0-9]_*" $editFile  --noreport >>  edit.txt
 sed -i 'edit.txt' ../../makeJson.js
 
 # makeJson.jsを実行し、config.jsに保存する
-node ../../makeJson.js >> ../config.json
+# node ../../makeJson.js >> ../config.json
 
 # 作業ディレクトリに戻る
-cd ../../
+# cd ../../
