@@ -39,24 +39,23 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get Diff
-        uses: technote-space/get-diff-action@v5
-        with:
-          FILES: |
-            README.md
+    - name: Get Diff
+      uses: technote-space/get-diff-action@v5
+      with:
+        FILES: |
+          README.md
 
-      - name: notify diff
-        if: contains(env.GIT_DIFF, 'README.md')
-        run: echo ${{ env.GIT_DIFF }}
-
-      # コメント投稿の箇所
-      - name: Post comments
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          URL: ${{ github.event.pull_request.html_url }}
-        run:
-          cat ./error.txt &&
-          gh pr comment -F ./error.txt "${URL}"
+    - name: notify diff
+      if: contains(env.GIT_DIFF, 'README.md')
+      run: echo ${{ env.GIT_DIFF }}
+    # コメント投稿の箇所
+    # - name: Post comments
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     URL: ${{ github.event.pull_request.html_url }}
+    #   run:
+    #     cat ./error.txt &&
+    #     gh pr comment -F ./error.txt "${URL}"
 
     # debug用のコード（ssh接続できるようになる）
     - name: Setup tmate session
