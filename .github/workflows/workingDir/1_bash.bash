@@ -15,7 +15,7 @@ fi
 ################     ファイル名の一部抽出&Json化    ##################
 
 git config --local core.quotepath false
-git diff remotes/get-diff-action/master --diff-filter=d --name-only | grep -o "/[0-9].*/lessons/[0-9].*/" > $work_dir/gitDiff.txt
+git diff remotes/get-diff-action/master --diff-filter=d --name-only | grep -o "/[0-9].*/lessons/[0-9].*/" | uniq -c |> $work_dir/gitDiff.txt
 # # gitの変更履歴で1_front or 2_backを選択する
 # workdir='1_front'
 
