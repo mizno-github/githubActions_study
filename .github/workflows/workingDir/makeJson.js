@@ -14,46 +14,38 @@ if (initDir.indexOf('/1_front/') === -1) {
 	process.exit(1)
 }
 
-
+// ファイル名を変更したりjson作成したりする部分（jsonの加工はcallback参照）
 var walk = function(p, callback){
-	var results = [];
+	var jsonArray = [];
 	fs.readdir(p, function (err, files) {
 		if (err) throw err;
 
-		var pending = files.length;
-		if (!pending) return callback(null, results); //全てのファイル取得が終わったらコールバックを呼び出す
+		var fileLen = files.length; // 処理の回数無くなった段階でcallback
+		if (!fileLen) return callback(jsonArray);
 
-		files.map(function (file) { //リスト取得
+		files.map(function (file) {
 			return path.join(p, file);
 		}).filter(function (file) {
-			if (fs.statSync(file).isDirectory()) walk(file, function (err, res) { //ディレクトリだったら再帰
-				// ファイル名を変更する
-				if (path.basename(file).match(reg)) {
-					// 旧ファイル名から新ファイル名を作成する
-					var fileName = path.basename(file);
-					var dir = path.dirname(file) + '/';
-					afterFileName = fileName.replace(/_.*/, '');
+			if (fs.statSync(file).isDirectory()) walk(file, function (err, res) {
+				// num_で始まるディレクトリ名を変更する
+				if (path.basename(file).match(reg)) changeFileName(file);
 
-					fs.rename(dir + fileName, dir + afterFileName, err => {
-						if (err) throw console.log('renameでエラーが起きました¥n' + err);
-					});
+				// リファクタリング対象。全てのディレクトリ名に対しlessonNameをつけて後半の処理でリネームしている
+				jsonArray.push({lessonName:path.basename(file), chapterName:res});
 
-				}
-				results.push({lessonName:path.basename(file), chapterName:res}); //子ディレクトリをchildrenインデックス配下に保存
-
-				if (!--pending) callback(null, results);
+				if (!--fileLen) callback(jsonArray);
 			});
       return fs.statSync(file).isFile();
     }).forEach(function (file) {
-			if (!--pending) callback(null, results);
+			if (!--fileLen) callback(jsonArray);
 		});
 
 	});
 }
 
-walk(initDir, function(err, results) {
-	if (err) throw err;
-	var jsons = results[0];
+
+walk(initDir, function(jsonArray) {
+	var jsons = jsonArray[0];
 
 	// ディレクトリの一番上のkey名を変更
 	jsonChangeKeyName(jsons)
@@ -70,6 +62,19 @@ walk(initDir, function(err, results) {
 	console.log(JSON.stringify(jsons, null, 1)); //一覧出力
 });
 
+/////////////// ファイルに関する処理 ////////////////////
+function changeFileName() {
+	// 旧ファイル名から新ファイル名を作成する
+	var fileName = path.basename(file);
+	var dir = path.dirname(file) + '/';
+	afterFileName = fileName.replace(/_.*/, '');
+
+	fs.rename(dir + fileName, dir + afterFileName, err => {
+		if (err) throw console.log('renameでエラーが起きました¥n' + err);
+	});
+}
+
+/////////////// jsonに関する処理 ////////////////////
 function jsonChangeKeyName(jsons) {
 	// 正しいKey名に変更
 	jsons.courseName = jsons.lessonName
