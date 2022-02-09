@@ -26,6 +26,7 @@ do
   cd $main_dir/$line
   cd ../
   node $work_dir/workingDir/makeJson.js > config.json
+  cat config.json
 done < $work_dir/gitDiff.txt
 
 
