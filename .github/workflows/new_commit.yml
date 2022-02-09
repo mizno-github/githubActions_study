@@ -49,21 +49,21 @@ jobs:
     #     FILES: |
     #       README.md
 
-    # - name: notify diff
-    #   if: contains(env.GIT_DIFF, 'README.md')
-    #   run: |
-    #     echo ${{ env.GIT_DIFF }}
-    # - name: bash
-    #   run: |
-    #     bash .github/workflows/workingDir/1_bash.bash
+    - name: notify diff
+      if: contains(env.GIT_DIFF, 'README.md')
+      run: |
+        echo ${{ env.GIT_DIFF }}
+    - name: bash
+      run: |
+        touch bash_test_dir/donb/error.txt
+        bash .github/workflows/workingDir/1_bash.bash >> error.txt
     # コメント投稿の箇所
     - name: showError
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         URL: ${{ github.event.pull_request.html_url }}
-      run:
-        touch bash_test_dir/donb/error.txt
-        bash .github/workflows/workingDir/1_bash.bash >> error.txt
+      run: |
+        cat ./error.txt &&
         gh pr comment -F ./error.txt "${URL}"
 
     # debug用のコード（ssh接続できるようになる）
