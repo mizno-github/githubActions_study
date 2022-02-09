@@ -63,7 +63,7 @@ walk(initDir, function(jsonArray) {
 });
 
 /////////////// ファイルに関する処理 ////////////////////
-function changeFileName() {
+function changeFileName(file) {
 	// 旧ファイル名から新ファイル名を作成する
 	var fileName = path.basename(file);
 	var dir = path.dirname(file) + '/';
