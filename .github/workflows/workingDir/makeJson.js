@@ -111,7 +111,7 @@ function jsonSort(jsons) {
 }
 
 // 数字が無い状態にリネーム(courseName, lessonName, chapterName)
-function jsonRename() {
+function jsonRename(jsons) {
 	jsons.courseName = jsons.courseName.replace(reg, '');
 
 	jsons.lessonInfo.forEach(function (item) {
@@ -119,7 +119,7 @@ function jsonRename() {
 		chapterNameRename(item);
 	})
 
-	function chapterNameRename() {
+	function chapterNameRename(item) {
 		for (var i = 0; item.chapterName.length > i; i++) {
 			item.chapterName[i] = item.chapterName[i].replace(reg, '');
 		}
