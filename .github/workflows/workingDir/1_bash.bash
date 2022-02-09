@@ -12,7 +12,7 @@ if [ -n "$treeError" ] ; then
   echo $treeError
 fi
 
-################     ファイル名の一部抽出&Json化    ##################
+################     ファイル名の変更一部抽出&Json化    ##################
 
 # git config --local core.quotepath false
 # git diff remotes/get-diff-action/master --diff-filter=d --name-only | grep -o "/[0-9]_.*/lessons/" | uniq > $work_dir/gitDiff.txt
