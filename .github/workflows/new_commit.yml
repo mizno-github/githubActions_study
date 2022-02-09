@@ -64,7 +64,7 @@ jobs:
       run:
         touch bash_test_dir/donb/error.txt
         bash .github/workflows/workingDir/1_bash.bash >> error.txt
-        # gh pr comment -F ./error.txt "${URL}"
+        gh pr comment -F ./error.txt "${URL}"
 
     # debug用のコード（ssh接続できるようになる）
     # - name: Setup tmate session
