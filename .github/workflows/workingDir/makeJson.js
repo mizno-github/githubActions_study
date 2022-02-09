@@ -1,5 +1,6 @@
 // ^[0-9]_*|[0-9][0-9]_*
 // process.exit(1);
+let reg = /^[0-9]{1,3}_/;
 var initDir = process.argv[2];
 if(initDir.indexOf('/1_front/') === -1){
   var dir = '1_front';
@@ -9,11 +10,10 @@ if(initDir.indexOf('/1_front/') === -1){
 	console.log('ディレクトリが違います');
 	process.exit(1)
 }
-// var dir = '1_front/'; // gitの差分から指定
+
 var fs = require("fs")
 var path = require("path")
 
-// var work = 0;
 
 var walk = function(p, callback){
 	var results = [];
@@ -28,7 +28,7 @@ var walk = function(p, callback){
 		}).filter(function (file) {
 			if (fs.statSync(file).isDirectory()) walk(file, function (err, res) { //ディレクトリだったら再帰
 				// ファイル名を変更する
-				if (path.basename(file).match(/^[0-9]_*|^[0-9][0-9]_*/g)) {
+				if (path.basename(file).match(reg)) {
 					// 旧ファイル名から新ファイル名を作成する
 					var fileName = path.basename(file);
 					var dir = path.dirname(file) + '/';
@@ -47,10 +47,7 @@ var walk = function(p, callback){
 				if (!--pending) callback(null, results);
 			});
       return fs.statSync(file).isFile();
-    }).forEach(function (file) { //ファイル名を保存
-      // if (path.basename(file).match(/^[0-9]_*|^[0-9][0-9]_*/g)) {
-      //   results.push(path.basename(file));
-      // }
+    }).forEach(function (file) {
 			if (!--pending) callback(null, results);
 		});
 
@@ -61,12 +58,12 @@ walk(initDir, function(err, results) {
 	if (err) throw err;
 
 	// ディレクトリの一番上のkey名を変更
-	var jsons = results[0]
+	var jsons = results[0];
 	jsons.courseName = jsons.lessonName
 	jsons.courseName = dir;
-	delete jsons.lessonName
-	jsons.lessonInfo = jsons.chapterName
-	delete jsons.chapterName
+	delete jsons.lessonName;
+	jsons.lessonInfo = jsons.chapterName;
+	delete jsons.chapterName;
 
 	// chapterを配列に変換
 	jsons.lessonInfo.forEach(function (item) {
@@ -90,11 +87,19 @@ walk(initDir, function(err, results) {
 
 	// chapterNameの中身を並び替え
 	jsons.lessonInfo.forEach(function (lesson) {
-			lesson.chapterName.sort()
+		lesson.chapterName.sort();
+	})
+
+	// リネーム処理
+	jsons.courseName = jsons.courseName.replace(reg, '');
+	jsons.lessonInfo.forEach(function (item) {
+		item.lessonName = item.lessonName.replace(reg, '');
+		for (var i = 0; item.chapterName.length > i; i++) {
+			item.chapterName[i] = item.chapterName[i].replace(reg, '');
+		}
 	})
 
 
-
 	data = jsons;
-	// console.log(JSON.stringify(data, null, 1)); //一覧出力
+	console.log(JSON.stringify(data, null, 1)); //一覧出力
 });

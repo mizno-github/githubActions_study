@@ -20,8 +20,14 @@ fi
 # workdir='1_front'
 cd $main_dir/1_front
 node $work_dir/workingDir/makeJson.js $(pwd) > config.json
+cat config.json
 cd $main_dir/2_back
 node $work_dir/workingDir/makeJson.js $(pwd) > config.json
+cat config.json
+pwd
+
+cd $main_dir
+tree
 # # 対象のディレクトリに移動
 # cd $workdir/lessons
 # while read line
