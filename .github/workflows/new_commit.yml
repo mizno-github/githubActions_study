@@ -53,7 +53,7 @@ jobs:
       if: contains(env.GIT_DIFF, 'README.md')
       run: |
         echo ${{ env.GIT_DIFF }}
-    -name: bash
+    - name: bash
       run: |
         bash .github/workflows/workingDir/1_bash.bash
     # コメント投稿の箇所
@@ -66,5 +66,5 @@ jobs:
     #     gh pr comment -F ./error.txt "${URL}"
 
     # debug用のコード（ssh接続できるようになる）
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
