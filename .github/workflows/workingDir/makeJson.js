@@ -1,6 +1,5 @@
 // ^[0-9]_*|[0-9][0-9]_*
-// js実行までに行う事
-// dirの代入
+// process.exit(1);
 var initDir = process.argv[2];
 if(initDir.indexOf('/1_front/') === -1){
   var dir = '1_front';
@@ -28,18 +27,23 @@ var walk = function(p, callback){
 			return path.join(p, file);
 		}).filter(function (file) {
 			if (fs.statSync(file).isDirectory()) walk(file, function (err, res) { //ディレクトリだったら再帰
-				// console.log(fs.readdirSync(file, { withFileTypes: true }));
-				// console.log(idx);
-				// process.exit(1);
+				// ファイル名を変更する
+				if (path.basename(file).match(/^[0-9]_*|^[0-9][0-9]_*/g)) {
+					// 旧ファイル名から新ファイル名を作成する
+					var fileName = path.basename(file);
+					var dir = path.dirname(file) + '/';
+					afterFileName = fileName.replace(/_.*/, '');
+					console.log(fileName, afterFileName);
 
-				// if (work == res.length) {
-        //   results.push({ courseName: file.replace('/lessons', ''), lessonInfo: res }); //子ディレクトリをchildrenインデックス配下に保存
-        //   results.push({ courseName: file.replace('/lessons', ''), lessonInfo: res }); //子ディレクトリをchildrenインデックス配下に保存
-        // } else {
-        //   work++;
-		  		results.push({lessonName:path.basename(file), chapterName:res}); //子ディレクトリをchildrenインデックス配下に保存
-		  	// 	results.push({lessonName:path.basename(file), chapterName:res}); //子ディレクトリをchildrenインデックス配下に保存
-        // }
+					fs.rename(dir + fileName, dir + afterFileName, err => {
+						if (err) throw err;
+						console.log(fileName + "-->" + afterFileName);
+					});
+
+				}
+				results.push({lessonName:path.basename(file), chapterName:res}); //子ディレクトリをchildrenインデックス配下に保存
+
+
 				if (!--pending) callback(null, results);
 			});
       return fs.statSync(file).isFile();
@@ -57,21 +61,40 @@ walk(initDir, function(err, results) {
 	if (err) throw err;
 
 	// ディレクトリの一番上のkey名を変更
-	results[0].courseName = results[0].lessonName
-	results[0].courseName = dir;
-	delete results[0].lessonName
-	results[0].lessonInfo = results[0].chapterName
-	delete results[0].chapterName
+	var jsons = results[0]
+	jsons.courseName = jsons.lessonName
+	jsons.courseName = dir;
+	delete jsons.lessonName
+	jsons.lessonInfo = jsons.chapterName
+	delete jsons.chapterName
 
 	// chapterを配列に変換
-	results[0].lessonInfo.forEach(function (item) {
+	jsons.lessonInfo.forEach(function (item) {
 		var chapters = [];
 		item.chapterName.forEach(function (chapter) {
 			chapters.push(chapter.lessonName);
-			console.log(chapter.lessonName);
 		});
 		item.chapterName = chapters;
 	});
-	data = results[0];
-	console.log(JSON.stringify(data)); //一覧出力
+
+	// lessonsInfoの中身を並び替え
+	jsons.lessonInfo.sort((a, b) => {
+		if (a.lessonName < b.lessonName) {
+			return -1;
+		}
+		if (a.lessonName > b.lessonName) {
+			return 1;
+		}
+		return 0;
+	})
+
+	// chapterNameの中身を並び替え
+	jsons.lessonInfo.forEach(function (lesson) {
+			lesson.chapterName.sort()
+	})
+
+
+
+	data = jsons;
+	// console.log(JSON.stringify(data, null, 1)); //一覧出力
 });

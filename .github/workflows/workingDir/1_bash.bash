@@ -14,19 +14,22 @@ fi
 
 ################     ファイル名の一部抽出&Json化    ##################
 
-git config --local core.quotepath false
-git diff remotes/get-diff-action/master --diff-filter=d --name-only | grep -o "/[0-9]_.*/lessons/[0-9].*/" | uniq > $work_dir/gitDiff.txt
+# git config --local core.quotepath false
+# git diff remotes/get-diff-action/master --diff-filter=d --name-only | grep -o "/[0-9]_.*/lessons/" | uniq > $work_dir/gitDiff.txt
 # # gitの変更履歴で1_front or 2_backを選択する
 # workdir='1_front'
-
+cd $main_dir/1_front
+node $work_dir/workingDir/makeJson.js $(pwd) > config.json
+cd $main_dir/2_back
+node $work_dir/workingDir/makeJson.js $(pwd) > config.json
 # # 対象のディレクトリに移動
 # cd $workdir/lessons
-while read line
-do
-  cd $main_dir/$line
-  cd ../
-  node $work_dir/workingDir/makeJson.js > config.json
-done < $work_dir/gitDiff.txt
+# while read line
+# do
+#   cd $main_dir/$line
+#   cd ../
+#   node $work_dir/workingDir/makeJson.js $(pwd) > config.json
+# done < $work_dir/gitDiff.txt
 
 
 # 1_frontをedit.txtに入れる
