@@ -28,6 +28,7 @@ pwd
 
 cd $main_dir
 tree
+
 # # 対象のディレクトリに移動
 # cd $workdir/lessons
 # while read line
