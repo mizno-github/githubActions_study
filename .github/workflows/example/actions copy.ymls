@@ -1,0 +1,80 @@
+name: NodeJS with Gulp
+
+on: pull_request
+
+
+jobs:
+  assign_self_to_pull_request:
+    name: Assign self to Pull Request
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    env:
+      GITHUB_TOKEN: ${{ secrets.PERSONAL_API_TOKEN }}
+      PR_NODE_ID: ${{ github.event.pull_request.node_id }}
+      USER_NODE_ID: ${{ github.event.pull_request.user.node_id }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign self to pull request
+        run: |
+          jq -cn '{
+            "query": "mutation ($input: AddAssigneesToAssignableInput!) {
+              addAssigneesToAssignable(input: $input) {
+                clientMutationId
+              }
+            }",
+            "variables": {
+              "input": {
+                "assigneeIds": ["'"${USER_NODE_ID}"'"],
+                "assignableId": "'"${PR_NODE_ID}"'"
+              }
+            }
+          }' \
+          | curl -s -X POST -H 'Content-Type: application/json' -H "Authorization: bearer ${GITHUB_TOKEN}" -d @- ${GITHUB_GRAPHQL_URL}
+
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      run: |
+        apt-get update && \
+        apt-get -y install git unzip libzip-dev libicu-dev libonig-dev vim wget tree && \
+        apt-get clean && \
+        rm -rf /var/lib/apt/lists/* && \
+        npm install gulp
+        npm install textlint@12
+
+    - name: test
+      run: |
+        touch bash_test_dir/donb/error.txt
+        source bash_test_dir/donb/1_bash.bash >> error.txt
+    - name: comment
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        URL: ${{ github.event.pull_request.html_url }}
+      run:
+
+
+        MESSAGE="ここがプルリクのタイトルになる
+
+        ## これ以降が説明欄の文章になる
+        markdown で書ける。
+        cat bash_test_dir/donb/error.txt
+        "
+        # git config --global user.name "mizno-github"
+
+        gh pr comment "$MESSAGE" "${URL}"
+        # git config --global user.email "mizno011.zeta@gmail.com"
+        # hub pull-request -m "$MESSAGE" -b main -h dev
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3

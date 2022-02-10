@@ -1,0 +1,71 @@
+name: NodeJS with Gulp
+
+on: pull_request
+
+
+jobs:
+  # ビルドの部分
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    # チェックアウト
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      run: |
+        apt-get update && \
+        apt-get -y install git unzip libzip-dev libicu-dev libonig-dev vim wget tree && \
+        apt-get clean && \
+        rm -rf /var/lib/apt/lists/* && \
+        npm install gulp
+        npm install textlint@12
+    # 自分が作成した部分
+    # - name: test
+    #   run: |
+    #     touch bash_test_dir/donb/error.txt
+    #     source bash_test_dir/donb/1_bash.bash >> error.txt
+    # 自分が作成した部分
+    # - name: test
+    #   run: |
+
+
+                                                  # - uses: actions/checkout@v2
+                                                  #   with:
+                                                  #     fetch-depth: 0
+
+    # - name: Get Diff
+    #   uses: technote-space/get-diff-action@v5
+    #   with:
+    #     FILES: |
+    #       README.md
+
+    - name: notify diff
+      if: contains(env.GIT_DIFF, 'README.md')
+      run: |
+        echo ${{ env.GIT_DIFF }}
+    - name: bash
+      run: |
+        touch bash_test_dir/donb/error.txt
+        bash .github/workflows/workingDir/1_bash.bash >> error.txt
+    # コメント投稿の箇所
+    - name: showError
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        URL: ${{ github.event.pull_request.html_url }}
+      run: |
+        cat ./error.txt &&
+        gh pr comment -F ./error.txt "${URL}"
+
+    # debug用のコード（ssh接続できるようになる）
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
