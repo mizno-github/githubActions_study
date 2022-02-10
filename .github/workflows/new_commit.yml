@@ -29,19 +29,6 @@ jobs:
         rm -rf /var/lib/apt/lists/* && \
         npm install gulp
         npm install textlint@12
-    # 自分が作成した部分
-    # - name: test
-    #   run: |
-    #     touch bash_test_dir/donb/error.txt
-    #     source bash_test_dir/donb/1_bash.bash >> error.txt
-    # 自分が作成した部分
-    # - name: test
-    #   run: |
-
-
-                                                  # - uses: actions/checkout@v2
-                                                  #   with:
-                                                  #     fetch-depth: 0
 
     # - name: Get Diff
     #   uses: technote-space/get-diff-action@v5
@@ -66,6 +53,7 @@ jobs:
         cat ./error.txt &&
         gh pr comment -F ./error.txt "${URL}"
 
+
     # debug用のコード（ssh接続できるようになる）
-    # - name: Setup tmate session
-    #   uses: mxschmitt/action-tmate@v3
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
