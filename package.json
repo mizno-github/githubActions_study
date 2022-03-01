@@ -1,0 +1,23 @@
+{
+  "name": "zenn-content",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preview": "npx zenn preview --port 3333",
+    "new:article": "npx zenn new:article",
+    "textlint": "textlint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "zenn-cli": "^0.1.38"
+  },
+  "devDependencies": {
+    "textlint": "^11.9.1",
+    "textlint-rule-preset-ja-spacing": "^2.2.0",
+    "textlint-rule-preset-ja-technical-writing": "^4.0.1"
+  }
+}
