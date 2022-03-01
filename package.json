@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@textlint/textlint-plugin-markdown": "^12.1.1",
     "zenn-cli": "^0.1.38"
   },
   "devDependencies": {
