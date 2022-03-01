@@ -16,7 +16,3 @@ jobs:
           level: warning
           textlint_flags: "bash_test_dir/**"
 
-      - name: Lint changelog file
-        uses: avto-dev/markdown-lint@v1
-        with:
-          args: 'bash_test_dir/*.md'
