@@ -15,3 +15,12 @@ jobs:
           reporter: github-pr-review
           level: warning
           textlint_flags: "bash_test_dir/**"
+          textlint_ignore: "bash_test_dir/**"
+
+      - name: markdownlint
+        uses: reviewdog/action-markdownlint@v0.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          level: warning
+          markdownlint_flags: "bash_test_dir/**"
